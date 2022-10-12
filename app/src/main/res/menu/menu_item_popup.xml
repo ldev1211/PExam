@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <group >
+        <item android:title="  Chia sẻ"
+            android:id="@+id/share"
+            android:icon="@drawable/share"/>
+        <item android:title="  Đánh giá"
+            android:id="@+id/rating"
+            android:icon="@drawable/rating"/>
+    </group>
+
+    <item android:title="  Khôi phục mặc định"
+        android:id="@+id/reset"
+        android:icon="@drawable/reset"/>
+</menu>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFrag">
+
+    <fragment
+        android:id="@+id/noteQuesFrag"
+        android:name="com.example.pexam.ui.NoteQuesFrag"
+        android:label="fragment_note_ques"
+        tools:layout="@layout/fragment_note_ques" >
+        <action
+            android:id="@+id/toHome"
+            app:destination="@id/homeFrag"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/toHomeFromNoteQues"
+            app:destination="@id/homeFrag"
+            app:enterAnim="@anim/left_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFrag"
+        android:name="com.example.pexam.ui.HomeFrag"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/toNoteQues"
+            app:destination="@id/noteQuesFrag"
+            app:enterAnim="@anim/right_to_left"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/toListSubjFromHome"
+            app:destination="@id/listSubjFrag"
+            app:enterAnim="@anim/right_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/listExamFrag"
+        android:name="com.example.pexam.ui.ListExamFrag"
+        android:label="fragment_list_exam"
+        tools:layout="@layout/fragment_list_exam" >
+        <argument
+            android:name="name_exam"
+            app:argType="string" />
+        <action
+            android:id="@+id/toListSubjFromListExam"
+            app:destination="@id/listSubjFrag"
+            app:enterAnim="@anim/left_to_right" />
+        <action
+            android:id="@+id/toTestingExamFromListExam"
+            app:destination="@id/testingExamFrag"
+            app:enterAnim="@anim/right_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/listSubjFrag"
+        android:name="com.example.pexam.ui.ListSubjFrag"
+        android:label="fragment_list_subj"
+        tools:layout="@layout/fragment_list_subj" >
+        <action
+            android:id="@+id/toHomeFromListSubj"
+            app:destination="@id/homeFrag"
+            app:enterAnim="@anim/left_to_right" />
+        <action
+            android:id="@+id/toListExamFromListSubj"
+            app:destination="@id/listExamFrag"
+            app:enterAnim="@anim/right_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/testingExamFrag"
+        android:name="com.example.pexam.ui.TestingExamFrag"
+        android:label="fragment_testing_exam"
+        tools:layout="@layout/fragment_testing_exam" >
+        <action
+            android:id="@+id/toListExamFromTestingExam"
+            app:destination="@id/listExamFrag"
+            app:enterAnim="@anim/left_to_right" />
+        <action
+            android:id="@+id/toConsequenceFromTestingExam"
+            app:destination="@id/consequenceFrag"
+            app:enterAnim="@anim/right_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/consequenceFrag"
+        android:name="com.example.pexam.ui.ConsequenceFrag"
+        android:label="fragment_consequence"
+        tools:layout="@layout/fragment_consequence" >
+        <action
+            android:id="@+id/toListExamFromConsequence"
+            app:destination="@id/listExamFrag"
+            app:enterAnim="@anim/left_to_right" />
+        <action
+            android:id="@+id/toTestingExamFromConsequence"
+            app:destination="@id/testingExamFrag"
+            app:enterAnim="@anim/left_to_right" />
+    </fragment>
+</navigation>

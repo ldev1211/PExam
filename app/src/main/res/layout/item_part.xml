@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingBottom="17dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvMaxNumQues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="11dp"
+        android:text="TextView"
+        android:textColor="#C4C4C4"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPercent"
+        app:layout_constraintEnd_toStartOf="@+id/divider" />
+
+    <TextView
+        android:id="@+id/tvNamePart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/open_sans"
+        android:text="GDQP - Phần 1a"
+        android:textColor="#3A3A3A"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNamePart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/icon_in" />
+
+    <TextView
+        android:id="@+id/tvPercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/open_sans"
+        android:text="0/40"
+        android:textColor="@color/primaryColor"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvNamePart"
+        app:layout_constraintTop_toBottomOf="@+id/tvNamePart" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="4dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/shape_progress"
+        app:layout_constraintEnd_toEndOf="@+id/tvTime"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/tvPercent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPercent" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="#C4C4C4"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/tvMaxNumQues" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/tvTime"
+        app:layout_constraintTop_toTopOf="@+id/tvTime"
+        app:srcCompat="@drawable/icon_time" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="1dp"
+        android:layout_height="14dp"
+        android:layout_marginEnd="11dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMaxNumQues"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

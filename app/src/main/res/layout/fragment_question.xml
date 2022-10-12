@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.QuestionFrag">
+
+    <TextView
+        android:id="@+id/tv_content_quest"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="25dp"
+        android:text="Nội dung câu hỏi:"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_quest"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_ansb"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_ans"
+                android:gravity="center"
+                android:text="B"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_ansa"
+                app:layout_constraintTop_toTopOf="@+id/ansb" />
+
+            <TextView
+                android:id="@+id/tv_ansa"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="28dp"
+                android:background="@drawable/shape_ans"
+                android:gravity="center"
+                android:text="A"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ansa" />
+
+            <TextView
+                android:id="@+id/tv_ansc"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_ans"
+                android:gravity="center"
+                android:text="C"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_ansb"
+                app:layout_constraintTop_toTopOf="@+id/ansc" />
+
+            <TextView
+                android:id="@+id/tv_ansd"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_ans"
+                android:gravity="center"
+                android:text="D"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_ansc"
+                app:layout_constraintTop_toTopOf="@+id/ansd" />
+
+            <TextView
+                android:id="@+id/ansa"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="17dp"
+                android:minHeight="30dp"
+                android:text="Câu trả lời Awekjjrhweierhwelkrjv;oijaewrvowierjwoaier;jilew;eakrjvwklerjwlkajrwelkrjlwk;vjtlerw;tjerwlitai;oertjer;oitjewrotjjpowrtjp3otj3op"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/visivility_a"
+                app:layout_constraintStart_toEndOf="@+id/tv_ansa"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ansb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="30dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="31dp"
+                android:layout_marginEnd="17dp"
+                android:text="Câu trả lời BCâu trả lời Awekjjrhweierhwelkrjv;oijaewrvowierjwoaier;jilew;eakrjvwklerjwlkajrwelkrjlwk;vjtlerw;tjerwlitai;oertjer;oitjewrotjjpowrtjp3otj3op"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/visivility_b"
+                app:layout_constraintStart_toEndOf="@+id/tv_ansb"
+                app:layout_constraintTop_toBottomOf="@+id/ansa" />
+
+            <TextView
+                android:id="@+id/ansc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="30dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="31dp"
+                android:layout_marginEnd="17dp"
+                android:text="Câu trả lời CCâu trả lời Awekjjrhweierhwelkrjv;oijaewrvowierjwoaier;jilew;eakrjvwklerjwlkajrwelkrjlwk;vjtlerw;tjerwlitai;oertjer;oitjewrotjjpowrtjp3otj3op"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/visivility_c"
+                app:layout_constraintStart_toEndOf="@+id/tv_ansc"
+                app:layout_constraintTop_toBottomOf="@+id/ansb" />
+
+            <TextView
+                android:id="@+id/ansd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="30dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="31dp"
+                android:layout_marginEnd="17dp"
+                android:text="Câu trả lời DCâu trả lời Awekjjrhweierhwelkrjv;oijaewrvowierjwoaier;jilew;eakrjvwklerjwlkajrwelkrjlwk;vjtlerw;tjerwlitai;oertjer;oitjewrotjjpowrtjp3otj3opCâu trả lời Awekjjrhweierhwelkrjv;oijaewrvowierjwoaier;jilew;eakrjvwklerjwlkajrwelkrjlwk;vjtlerw;tjerwlitai;oertjer;oitjewrotjjpowrtjp3otj3op"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/visivility_d"
+                app:layout_constraintStart_toEndOf="@+id/tv_ansd"
+                app:layout_constraintTop_toBottomOf="@+id/ansc" />
+
+            <ImageView
+                android:id="@+id/visivility_a"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="28dp"
+                android:src="@drawable/ic_visibility_outline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ansa" />
+
+            <ImageView
+                android:id="@+id/visivility_b"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_visibility_outline"
+                app:layout_constraintEnd_toEndOf="@+id/visivility_a"
+                app:layout_constraintTop_toTopOf="@+id/ansb" />
+
+            <ImageView
+                android:id="@+id/visivility_c"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_visibility_outline"
+                app:layout_constraintEnd_toEndOf="@+id/visivility_b"
+                app:layout_constraintTop_toTopOf="@+id/ansc" />
+
+            <ImageView
+                android:id="@+id/visivility_d"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_visibility_outline"
+                app:layout_constraintEnd_toEndOf="@+id/visivility_c"
+                app:layout_constraintTop_toTopOf="@+id/ansd" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

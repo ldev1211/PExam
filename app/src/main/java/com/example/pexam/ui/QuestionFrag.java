@@ -26,6 +26,7 @@ public class QuestionFrag extends Fragment implements View.OnClickListener {
     int colorSelected,colorNormal,colorHide,colorWhite,maxNumQuest;
     Drawable drawableNormal,drawableSelected;
     TabLayout.Tab tabItem;
+
     public QuestionFrag(TabLayout.Tab tabItem,TextView tvAnswered,int maxNumQuest){
         this.tabItem = tabItem;
         this.tvAnswered = tvAnswered;

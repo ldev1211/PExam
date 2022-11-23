@@ -1,37 +1,47 @@
 package com.example.pexam.model;
 
 public class GridKind {
+    private String codeKind;
     private String name;
-    private int imgItem;
+    private String imgLink;
     private int numSubj;
-
-    public int getNumSubj() {
-        return numSubj;
-    }
-
-    public void setNumSubj(int numQuestion) {
-        this.numSubj = numQuestion;
-    }
 
     public String getName() {
         return name;
+    }
+
+    public String getCodeKind() {
+        return codeKind;
+    }
+
+    public void setCodeKind(String codeKind) {
+        this.codeKind = codeKind;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getImgItem() {
-        return imgItem;
+    public String getImgLink() {
+        return imgLink;
     }
 
-    public void setImgItem(int imgItem) {
-        this.imgItem = imgItem;
+    public void setImgLink(String imgLink) {
+        this.imgLink = imgLink;
     }
 
-    public GridKind(String name, int imgItem, int numSubj) {
+    public int getNumSubj() {
+        return numSubj;
+    }
+
+    public void setNumSubj(int numSubj) {
+        this.numSubj = numSubj;
+    }
+
+    public GridKind(String codeKind, String name, String imgLink, int numSubj) {
+        this.codeKind = codeKind;
         this.name = name;
-        this.imgItem = imgItem;
+        this.imgLink = imgLink;
         this.numSubj = numSubj;
     }
 }

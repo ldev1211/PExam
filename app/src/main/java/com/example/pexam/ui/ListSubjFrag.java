@@ -1,6 +1,7 @@
 package com.example.pexam.ui;
 
 import static com.example.pexam.application.ApplicationConfig.NAME_SQLITE;
+import static com.example.pexam.application.ApplicationConfig.mSocket;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,12 +22,19 @@ import com.example.pexam.R;
 import com.example.pexam.adapter.GridSubjectAdapter;
 import com.example.pexam.database.Database;
 import com.example.pexam.model.Subject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
+import io.socket.emitter.Emitter;
 
 public class ListSubjFrag extends Fragment {
 
@@ -35,56 +43,27 @@ public class ListSubjFrag extends Fragment {
     GridView gridSubj;
     GridSubjectAdapter adapter;
     List<Subject> subjects;
-    Database database;
-    Cursor cursor;
+    String codeKind;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_subj, container, false);
+        subjects = new ArrayList<>();
         imgBack = view.findViewById(R.id.imgBack);
         kindName = view.findViewById(R.id.tv_name_kind);
         gridSubj = view.findViewById(R.id.grid_subj);
-        database = new Database(getContext(),NAME_SQLITE,null,1);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("stateApplication", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String nameKind = sharedPreferences.getString("nameKindCurr",null);
-        switch (nameKind){
-            case "Kỹ thuật":
-                cursor = database.getData("SELECT * FROM SettingExamTech");
-                break;
-            case "Kinh tế":
-                cursor = database.getData("SELECT * FROM SettingExamEconomy");
-                break;
-            case "Tin cơ sở":
-                cursor = database.getData("SELECT * FROM SettingExamOfficial");
-                break;
-            case "Quốc phòng":
-                cursor = database.getData("SELECT * FROM SettingExamDefence");
-                break;
-        }
         kindName.setText(nameKind.toUpperCase(Locale.ROOT));
-        subjects = new ArrayList<>();
-        Map<String,Integer> map = new HashMap<>();
-        while(cursor.moveToNext()){
-            String nameSubj = cursor.getString(0);
-            Integer value = map.get(nameSubj);
-            if(value==null) map.put(nameSubj,1);
-            else {
-                value++;
-                map.put(nameSubj,value);
-            }
-        }
-        Set<String> set = map.keySet();
-        for(String s:set){
-            subjects.add(new Subject(s,map.get(s)));
-        }
-        adapter = new GridSubjectAdapter(getActivity(),subjects);
-        gridSubj.setAdapter(adapter);
+        codeKind = sharedPreferences.getString("codeKindCurr",null);
         gridSubj.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String nameSubj = subjects.get(i).getNameSub();
                 editor.putString("nameSubjCurr",nameSubj);
+                editor.putString("codeSubjCurr",subjects.get(i).getCodeSubj());
                 editor.apply();
                 Navigation.findNavController(view).navigate(R.id.toListExamFromListSubj);
             }
@@ -95,8 +74,38 @@ public class ListSubjFrag extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.toHomeFromListSubj);
             }
         });
+        initOn();
+        initEmit();
         return view;
     }
+
+    private void initOn() {
+        mSocket.on("RETURN_SUBJ", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                requireActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        JSONObject jsonObject = (JSONObject) args[0];
+                        try {
+                            JSONArray jsonArray = jsonObject.getJSONArray("data_list");
+                            for(int i=0;i<jsonArray.length();++i){
+                                JSONObject tmp = jsonArray.getJSONObject(i);
+                                subjects.add(new Subject(tmp.getString("code_subj"),tmp.getString("name_subj"),tmp.getInt("part_count")));
+                            }
+                            if(adapter==null){
+                                adapter = new GridSubjectAdapter(requireActivity(),subjects);
+                                gridSubj.setAdapter(adapter);
+                            } else adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -112,5 +121,8 @@ public class ListSubjFrag extends Fragment {
                 return false;
             }
         });
+    }
+    public void initEmit(){
+        mSocket.emit("GET_SUBJ",codeKind);
     }
 }

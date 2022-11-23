@@ -1,7 +1,13 @@
 package com.example.pexam.adapter;
 
+import static com.example.pexam.application.ApplicationConfig.NAME_SQLITE;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +16,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pexam.R;
+import com.example.pexam.database.Database;
 import com.example.pexam.model.Docs;
 import com.example.pexam.model.Question;
 
 import java.util.List;
 
 public class ListViewDocsAdapter extends BaseAdapter {
+
     Context context;
     List<Docs> docs;
     LayoutInflater inflater;
+
     public ListViewDocsAdapter(Context context, List<Docs> docs) {
         this.context = context;
         this.docs = docs;
@@ -44,9 +53,14 @@ public class ListViewDocsAdapter extends BaseAdapter {
     ImageView mark;
     int colorSelected,colorWhite;
     Drawable drawableSelected;
+    Database database;
+    SharedPreferences sharedPreferences;
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflater.inflate(R.layout.item_note_ques,viewGroup,false);
+        sharedPreferences = view.getContext().getSharedPreferences("stateApplication",Context.MODE_PRIVATE);
+        database = new Database(view.getContext(),NAME_SQLITE,null,1);
         colorSelected = view.getResources().getColor(R.color.primaryColor);
         colorWhite = view.getResources().getColor(R.color.white);
         drawableSelected = view.getResources().getDrawable(R.drawable.shape_ans_selected);
@@ -84,6 +98,27 @@ public class ListViewDocsAdapter extends BaseAdapter {
             ansD.setTextColor(colorWhite);
         }
         mark.setImageResource((doc.isNote())?R.drawable.ic_mark:R.drawable.ic_mark_yet);
+        mark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                docs.get(i).setNote(!docs.get(i).isNote());
+                mark.setImageResource((docs.get(i).isNote())?R.drawable.ic_mark:R.drawable.ic_mark_yet);
+                Log.d("TAG", "onClick: "+docs.get(i).getContentQuestion()+" and "+docs.get(i).isNote()+" and "+i);
+                if(docs.get(i).isNote()) {
+                    database.queryData("INSERT INTO Note VALUES(" +
+                            "'"+sharedPreferences.getString("codeKindCurr",null)+ "'" +
+                            ",'"+sharedPreferences.getString("nameKindCurr",null) +"'" +
+                            ",'"+docs.get(i).getContentQuestion()+"'" +
+                            ",'"+docs.get(i).getAns1()+"'" +
+                            ",'"+docs.get(i).getAns2()+"'" +
+                            ",'"+docs.get(i).getAns3()+"'" +
+                            ",'"+docs.get(i).getAns4()+"'" +
+                            ",'"+docs.get(i).getAnsRight()+"')"
+                    );
+                }
+                else database.queryData("DELETE FROM Note WHERE codeKind = '"+sharedPreferences.getString("codeKindCurr",null)+"' AND contentQuestion = '"+docs.get(i).getContentQuestion()+"'");
+            }
+        });
         return view;
     }
 }

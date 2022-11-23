@@ -40,6 +40,7 @@
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/drawable/shape_item_grid_subj.xml" value="0.2035" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/drawable/shape_progress.xml" value="0.186" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/drawable/share.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/PExam/app/src/main/res/drawable/splash_screen.xml" value="0.1" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/drawable/visibility.xml" value="0.2035" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/font/open_sans.xml" value="0.23076923076923078" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/activity_main.xml" value="0.23464373464373464" />
@@ -50,17 +51,18 @@
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/diaglog_submit.xml" value="0.33" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/dialog_y_n.xml" value="0.33" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_consequence.xml" value="0.25" />
-        <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_home.xml" value="0.18" />
+        <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_list_exam.xml" value="0.2" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_list_subj.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_note_ques.xml" value="0.33" />
-        <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_question.xml" value="0.22" />
+        <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_question.xml" value="0.25" />
+        <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_searched.xml" value="0.25" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_tab_list_docs.xml" value="0.17889492753623187" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_tab_list_ex.xml" value="0.17889492753623187" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_tab_note.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_testing_exam.xml" value="0.2" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_docs.xml" value="0.5" />
-        <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_grid.xml" value="0.33" />
+        <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_grid.xml" value="0.22" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_note_ques.xml" value="0.33" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_part.xml" value="0.493844049247606" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_search.xml" value="0.33" />

@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/white"
+    android:clickable="true"
     android:paddingBottom="18dp">
 
     <TextView
-        android:id="@+id/mark_tv_content_quest"
+        android:id="@+id/tv_content_quest_searched"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -17,12 +18,12 @@
         android:text="Nội dung câu hỏi:"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/img_mark_state"
+        app:layout_constraintEnd_toStartOf="@+id/img_mark_state_searched"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/mark_tv_ansb"
+        android:id="@+id/ansb_searched"
         android:layout_width="29dp"
         android:layout_height="29dp"
         android:background="@drawable/shape_ans"
@@ -30,11 +31,11 @@
         android:text="B"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/mark_tv_ansa"
-        app:layout_constraintTop_toTopOf="@+id/mark_ansb" />
+        app:layout_constraintStart_toStartOf="@+id/ansa_searched"
+        app:layout_constraintTop_toTopOf="@+id/tv_content_ansb_searched" />
 
     <TextView
-        android:id="@+id/mark_tv_ansa"
+        android:id="@+id/ansa_searched"
         android:layout_width="29dp"
         android:layout_height="29dp"
         android:layout_marginStart="22dp"
@@ -44,10 +45,10 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mark_ansa" />
+        app:layout_constraintTop_toTopOf="@+id/tv_content_ansa_searched" />
 
     <TextView
-        android:id="@+id/mark_tv_ansc"
+        android:id="@+id/ansc_searched"
         android:layout_width="29dp"
         android:layout_height="29dp"
         android:background="@drawable/shape_ans"
@@ -55,11 +56,11 @@
         android:text="C"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/mark_tv_ansb"
-        app:layout_constraintTop_toTopOf="@+id/mark_ansc" />
+        app:layout_constraintStart_toStartOf="@+id/ansb_searched"
+        app:layout_constraintTop_toTopOf="@+id/tv_content_ansc_searched" />
 
     <TextView
-        android:id="@+id/mark_tv_ansd"
+        android:id="@+id/ansd_searched"
         android:layout_width="29dp"
         android:layout_height="29dp"
         android:background="@drawable/shape_ans"
@@ -67,11 +68,11 @@
         android:text="D"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/mark_tv_ansc"
-        app:layout_constraintTop_toTopOf="@+id/mark_ansd" />
+        app:layout_constraintStart_toStartOf="@+id/ansc_searched"
+        app:layout_constraintTop_toTopOf="@+id/tv_content_ansd_searched" />
 
     <TextView
-        android:id="@+id/mark_ansa"
+        android:id="@+id/tv_content_ansa_searched"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -81,11 +82,11 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/mark_tv_ansa"
-        app:layout_constraintTop_toBottomOf="@+id/mark_tv_content_quest" />
+        app:layout_constraintStart_toEndOf="@+id/ansa_searched"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_quest_searched" />
 
     <TextView
-        android:id="@+id/mark_ansb"
+        android:id="@+id/tv_content_ansb_searched"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -93,12 +94,12 @@
         android:text="Câu trả lời B"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/mark_ansa"
-        app:layout_constraintStart_toEndOf="@+id/mark_tv_ansb"
-        app:layout_constraintTop_toBottomOf="@+id/mark_ansa" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_content_ansa_searched"
+        app:layout_constraintStart_toEndOf="@+id/ansb_searched"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_ansa_searched" />
 
     <TextView
-        android:id="@+id/mark_ansc"
+        android:id="@+id/tv_content_ansc_searched"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -106,12 +107,12 @@
         android:text="Câu trả lời C"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/mark_ansb"
-        app:layout_constraintStart_toEndOf="@+id/mark_tv_ansc"
-        app:layout_constraintTop_toBottomOf="@+id/mark_ansb" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_content_ansb_searched"
+        app:layout_constraintStart_toEndOf="@+id/ansc_searched"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_ansb_searched" />
 
     <TextView
-        android:id="@+id/mark_ansd"
+        android:id="@+id/tv_content_ansd_searched"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -119,19 +120,19 @@
         android:text="Câu trả lời D"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/mark_ansc"
-        app:layout_constraintStart_toEndOf="@+id/mark_tv_ansd"
-        app:layout_constraintTop_toBottomOf="@+id/mark_ansc" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_content_ansc_searched"
+        app:layout_constraintStart_toEndOf="@+id/ansd_searched"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_ansc_searched" />
 
     <ImageView
-        android:id="@+id/img_mark_state"
+        android:id="@+id/img_mark_state_searched"
         android:layout_width="18dp"
         android:layout_height="22dp"
         android:layout_marginTop="33dp"
         android:layout_marginEnd="3dp"
         android:scaleType="center"
-        app:layout_constraintBottom_toBottomOf="@+id/mark_tv_content_quest"
-        app:layout_constraintEnd_toEndOf="@+id/mark_ansa"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_content_quest_searched"
+        app:layout_constraintEnd_toEndOf="@+id/tv_content_ansa_searched"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_mark" />
 

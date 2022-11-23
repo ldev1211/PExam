@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.pexam.R;
 import com.example.pexam.model.GridKind;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -41,12 +42,10 @@ public class GridAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = layoutInflater.inflate(R.layout.item_grid,null);
-        TextView tvNameItem = view.findViewById(R.id.tv_name_item_grid);
-        TextView tvNumQuest = view.findViewById(R.id.tv_num_subj);
         ImageView imageView = view.findViewById(R.id.imgItemGrid);
-        tvNumQuest.setText(listItemGrid.get(i).getNumSubj()+" môn học");
+        Picasso.get().load(listItemGrid.get(i).getImgLink()).into(imageView);
+        TextView tvNameItem = view.findViewById(R.id.tv_name_item_grid);
         tvNameItem.setText(listItemGrid.get(i).getName());
-        imageView.setImageResource(listItemGrid.get(i).getImgItem());
         return view;
     }
 }

@@ -16,7 +16,7 @@
         <!-- Customize your theme here. -->
     </style>
     <style name="plashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/plashscr</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:statusBarColor">@color/nightMode</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="colorAccent">@color/primaryColor</item>

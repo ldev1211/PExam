@@ -1,6 +1,7 @@
 package com.example.pexam.ui;
 
 import static com.example.pexam.application.ApplicationConfig.NAME_SQLITE;
+import static com.example.pexam.application.ApplicationConfig.mSocket;
 import static com.example.pexam.application.ApplicationConfig.numAnswered;
 
 import android.app.Dialog;
@@ -32,10 +33,17 @@ import com.example.pexam.model.Question;
 import com.example.pexam.model.TimeCountDown;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import io.socket.emitter.Emitter;
 
 public class TestingExamFrag extends Fragment {
 
@@ -54,6 +62,8 @@ public class TestingExamFrag extends Fragment {
     Cursor cursor;
     float secondCDExam,secondCDExamCurr,count=0;
     String nameKind,nameSubj,namePart;
+    SharedPreferences sharedPreferences;
+    String codePart;
     boolean clickSubmit;
 
     @Override
@@ -70,36 +80,15 @@ public class TestingExamFrag extends Fragment {
         tvSubmit = view.findViewById(R.id.tv_submit);
         numAnswered = 0;
         database = new Database(getContext(),NAME_SQLITE,null,1);
-        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("stateApplication", Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences("stateApplication", Context.MODE_PRIVATE);
         nameKind = sharedPreferences.getString("nameKindCurr",null);
         nameSubj = sharedPreferences.getString("nameSubjCurr",null);
         namePart = sharedPreferences.getString("namePart",null);
         secondCDExam = sharedPreferences.getInt("time",0);
+        codePart = sharedPreferences.getString("codePartCurr",null);
         questions = new ArrayList<>();
-        switch (nameKind){
-            case "Kỹ thuật":
-                cursor = database.getData("SELECT * FROM DetailQuestionTech WHERE nameSubj = '"+nameSubj+"' AND part = '"+namePart+"'");
-                break;
-            case "Kinh tế":
-                cursor = database.getData("SELECT * FROM DetailQuestionEconomy WHERE nameSubj = '"+nameSubj+"' AND part = '"+namePart+"'");
-                break;
-            case "Tin cơ sở":
-                cursor = database.getData("SELECT * FROM DetailQuestionOfficial WHERE nameSubj = '"+nameSubj+"' AND part = '"+namePart+"'");
-                break;
-            case "Quốc phòng":
-                cursor = database.getData("SELECT * FROM DetailQuestionDefence WHERE nameSubj = '"+nameSubj+"' AND part = '"+namePart+"'");
-                break;
-        }
-        while(cursor.moveToNext()){
-            questions.add(new Question(cursor.getString(2)
-                    ,new AnsState(cursor.getString(3),false,false)
-                    ,new AnsState(cursor.getString(4),false,false)
-                    ,new AnsState(cursor.getString(5),false,false)
-                    ,new AnsState(cursor.getString(6),false,false)
-                    ,cursor.getString(7)
-                    ,false
-                    ,(cursor.getInt(8) == 1)));
-        }
+        initOn();
+        initEmit();
         tvProgress.setText("Đã làm "+numAnswered+"/"+questions.size());
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -117,22 +106,6 @@ public class TestingExamFrag extends Fragment {
 
             }
         });
-        adapter = new ViewPagerTestingAdapter(requireActivity(),viewPager2,questions,tabLayout,tvProgress);
-        viewPager2.setAdapter(adapter);
-        mediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position){
-                    case 0:
-                        tab.setCustomView(createCustomTabView(String.valueOf(position+1),22, R.color.textTab));
-                        break;
-                    default:
-                        tab.setCustomView(createCustomTabView(String.valueOf(position+1),15, R.color.textTab));
-                        break;
-                }
-            }
-        });
-        mediator.attach();
         imageViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,6 +152,60 @@ public class TestingExamFrag extends Fragment {
         timerCountDownThread.start();
         Log.d("state", "onCreateView: ");
         return view;
+    }
+
+    private void initEmit() {
+        mSocket.emit("GET_QUESTION_TESTING",codePart);
+    }
+
+    private void initOn() {
+        mSocket.on("RETURN_QUESTION_TESTING", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                requireActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        JSONObject jsonObject = (JSONObject) args[0];
+                        try {
+                            JSONArray jsonArray = jsonObject.getJSONArray("data_list");
+                            for(int i=0;i<jsonArray.length();++i){
+                                JSONObject tmp = jsonArray.getJSONObject(i);
+                                questions.add(new Question(
+                                        tmp.getString("question_content"),
+                                        new AnsState(tmp.getString("ansa"),false,false),
+                                        new AnsState(tmp.getString("ansb"),false,false),
+                                        new AnsState(tmp.getString("ansc"),false,false),
+                                        new AnsState(tmp.getString("ansd"),false,false),
+                                        tmp.getString("ans_right"),
+                                        false,
+                                        false
+                                ));
+                            }
+                            if(adapter==null){
+                                adapter = new ViewPagerTestingAdapter(requireActivity(),viewPager2,questions,tabLayout,tvProgress);
+                                viewPager2.setAdapter(adapter);
+                                mediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+                                    @Override
+                                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                                        switch (position){
+                                            case 0:
+                                                tab.setCustomView(createCustomTabView(String.valueOf(position+1),22, R.color.textTab));
+                                                break;
+                                            default:
+                                                tab.setCustomView(createCustomTabView(String.valueOf(position+1),15, R.color.textTab));
+                                                break;
+                                        }
+                                    }
+                                });
+                                mediator.attach();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
     }
 
     @Override

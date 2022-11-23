@@ -1,6 +1,7 @@
 package com.example.pexam.ui;
 
 import static com.example.pexam.application.ApplicationConfig.NAME_SQLITE;
+import static com.example.pexam.application.ApplicationConfig.mSocket;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,81 +23,91 @@ import com.example.pexam.adapter.ListViewNameExamAdapter;
 import com.example.pexam.database.Database;
 import com.example.pexam.model.Exam;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import io.socket.emitter.Emitter;
+
 public class TabListExFrag extends Fragment {
     private static final String TAG = "CURSOR";
     ListView lvExam;
     ListViewNameExamAdapter adapter;
     List<Exam> exams;
+    SharedPreferences sharedPreferences;
     Database database;
     Cursor cursor;
-    String nameSubj,nameKind;
     View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_tab_list_ex, container, false);
+        sharedPreferences = requireActivity().getSharedPreferences("stateApplication", Context.MODE_PRIVATE);
         lvExam = view.findViewById(R.id.lv_exam);
         exams = new ArrayList<>();
         database = new Database(getContext(), NAME_SQLITE, null, 1);
-        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("stateApplication", Context.MODE_PRIVATE);
-        nameSubj = sharedPreferences.getString("nameSubjCurr", null);
-        nameKind = sharedPreferences.getString("nameKindCurr", null);
-        switch (nameKind){
-            case "Kỹ thuật":
-                cursor = database.getData("SELECT * FROM SettingExamTech WHERE SettingExamTech.nameSubj = '"+nameSubj+"'");
-                break;
-            case "Kinh tế":
-                cursor = database.getData("SELECT * FROM SettingExamEconomy WHERE SettingExamEconomy.nameSubj = '"+nameSubj+"'");
-                break;
-            case "Tin cơ sở":
-                cursor = database.getData("SELECT * FROM SettingExamOfficial WHERE SettingExamOfficial.nameSubj = '"+nameSubj+"'");
-                break;
-            case "Quốc phòng":
-                cursor = database.getData("SELECT * FROM SettingExamDefence WHERE SettingExamDefence.nameSubj = '"+nameSubj+"'");
-                break;
-        }
-        while(cursor.moveToNext()){
-            exams.add(new Exam(cursor.getString(0),cursor.getString(1),cursor.getInt(2),cursor.getInt(3),0));
-        }
-        switch (nameKind){
-            case "Kỹ thuật":
-                cursor = database.getData("SELECT * FROM ConsequenceExamTech WHERE nameSubj = '"+nameSubj+"'");
-                break;
-            case "Kinh tế":
-                cursor = database.getData("SELECT * FROM ConsequenceExamEconomy WHERE nameSubj = '"+nameSubj+"'");
-                break;
-            case "Tin cơ sở":
-                cursor = database.getData("SELECT * FROM ConsequenceExamOfficial WHERE nameSubj = '"+nameSubj+"'");
-                break;
-            case "Quốc phòng":
-                cursor = database.getData("SELECT * FROM ConsequenceExamDefence WHERE nameSubj = '"+nameSubj+"'");
-                break;
-        }
-        while(cursor.moveToNext()){
-            for(int i=0;i<exams.size();++i){
-                if(exams.get(i).getPart().equals(cursor.getString(1))){
-                    exams.get(i).setNumAnsRight(cursor.getInt(2));
-                }
-            }
-        }
-        adapter = new ListViewNameExamAdapter(requireContext(),exams);
-        lvExam.setAdapter(adapter);
         lvExam.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("namePart",exams.get(i).getPart());
+                editor.putString("namePart",exams.get(i).getNamePart());
+                editor.putString("codePartCurr",exams.get(i).getCodePart());
                 editor.putInt("time",exams.get(i).getTime());
                 editor.apply();
                 Navigation.findNavController(view).navigate(R.id.toTestingExamFromListExam);
             }
         });
+        initOn();
+        initEmit();
         return view;
+    }
+
+    public void initEmit(){
+        mSocket.emit("GET_EXAM",sharedPreferences.getString("codeSubjCurr",null));
+    }
+    public void initOn(){
+        mSocket.on("RETURN_EXAM_PART", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                requireActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        JSONObject jsonObject = (JSONObject) args[0];
+                        try {
+                            JSONArray jsonArray = jsonObject.getJSONArray("data_list");
+                            for(int i=0;i<jsonArray.length();++i){
+                                JSONObject tmp = jsonArray.getJSONObject(i);
+                                int consequence=0;
+                                cursor = database.getData("SELECT * FROM ConsequenceExam WHERE codePart = '"+tmp.getString("code_part")+"'");
+                                while(cursor.moveToNext()){
+                                    consequence = cursor.getInt(1);
+                                }
+                                exams.add(new Exam(
+                                        tmp.getString("code_subj"),
+                                        tmp.getString("code_part"),
+                                        tmp.getString("name_part"),
+                                        tmp.getInt("question_count"),
+                                        tmp.getInt("time"),
+                                        consequence
+                                ));
+                            }
+                            if(adapter==null){
+                                adapter = new ListViewNameExamAdapter(requireContext(),exams);
+                                Log.d(TAG, "run: "+exams);
+                                lvExam.setAdapter(adapter);
+                            } else adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
     }
 }

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,10 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NoteQuesFrag extends Fragment {
 
@@ -39,7 +43,7 @@ public class NoteQuesFrag extends Fragment {
     ViewPagerNoteAdapter adapter;
     Database database;
     TabLayoutMediator mediator;
-    Cursor cursorTech=null,cursorEconomy=null,cursorOfficial=null,cursorDefence=null;
+    Cursor cursor;
     List<KindAndQuestionNote> kindAndQuestionNotes;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,62 +54,38 @@ public class NoteQuesFrag extends Fragment {
         viewPager2 = view.findViewById(R.id.pager_note_quest);
         deleteAll = view.findViewById(R.id.deleteAll);
         database = new Database(getContext(),NAME_SQLITE,null,1);
-        cursorTech = database.getData("SELECT * FROM DetailQuestionTech WHERE isNoted = 1");
-        cursorEconomy = database.getData("SELECT * FROM DetailQuestionEconomy WHERE isNoted = 1");
-        cursorOfficial = database.getData("SELECT * FROM DetailQuestionOfficial WHERE isNoted = 1");
-        cursorDefence = database.getData("SELECT * FROM DetailQuestionDefence WHERE isNoted = 1");
+        cursor = database.getData("SELECT * FROM Note");
         kindAndQuestionNotes = new ArrayList<>();
-        if(cursorTech.getCount()>0){
-            kindAndQuestionNotes.add(new KindAndQuestionNote("Kỹ thuật",new ArrayList<>()));
-            while(cursorTech.moveToNext()){
-                kindAndQuestionNotes.get(kindAndQuestionNotes.size()-1).getListQuestion().add(new Docs(cursorTech.getString(2)
-                        ,cursorTech.getString(3)
-                        ,cursorTech.getString(4)
-                        ,cursorTech.getString(5)
-                        ,cursorTech.getString(6)
-                        ,cursorTech.getString(7)
-                        ,true
+        Map<String,String> map = new HashMap<>();
+        while (cursor.moveToNext()){
+            if (map.get(cursor.getString(0))==null){
+                kindAndQuestionNotes.add(new KindAndQuestionNote(cursor.getString(1),new ArrayList<>()));
+                kindAndQuestionNotes.get(kindAndQuestionNotes.size()-1).getListQuestion().add(new Docs(
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        cursor.getString(7),
+                        true
                 ));
+            } else {
+                for(int i=0;i<kindAndQuestionNotes.size();++i){
+                    if(kindAndQuestionNotes.get(i).getNameKind().equals(cursor.getString(1))){
+                        kindAndQuestionNotes.get(i).getListQuestion().add(new Docs(
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getString(5),
+                                cursor.getString(6),
+                                cursor.getString(7),
+                                true
+                        ));
+                        break;
+                    }
+                }
             }
-        }
-        if(cursorEconomy.getCount()>0){
-            kindAndQuestionNotes.add(new KindAndQuestionNote("Kinh tế",new ArrayList<>()));
-            while(cursorEconomy.moveToNext()){
-                kindAndQuestionNotes.get(kindAndQuestionNotes.size()-1).getListQuestion().add(new Docs(cursorEconomy.getString(2)
-                        ,cursorEconomy.getString(3)
-                        ,cursorEconomy.getString(4)
-                        ,cursorEconomy.getString(5)
-                        ,cursorEconomy.getString(6)
-                        ,cursorEconomy.getString(7)
-                        ,true
-                ));
-            }
-        }
-        if(cursorOfficial.getCount()>0){
-            kindAndQuestionNotes.add(new KindAndQuestionNote("Tin cơ sở",new ArrayList<>()));
-            while(cursorOfficial.moveToNext()){
-                kindAndQuestionNotes.get(kindAndQuestionNotes.size()-1).getListQuestion().add(new Docs(cursorOfficial.getString(2)
-                        ,cursorOfficial.getString(3)
-                        ,cursorOfficial.getString(4)
-                        ,cursorOfficial.getString(5)
-                        ,cursorOfficial.getString(6)
-                        ,cursorOfficial.getString(7)
-                        ,true
-                ));
-            }
-        }
-        if(cursorDefence.getCount()>0){
-            kindAndQuestionNotes.add(new KindAndQuestionNote("Quốc phòng",new ArrayList<>()));
-            while(cursorDefence.moveToNext()){
-                kindAndQuestionNotes.get(kindAndQuestionNotes.size()-1).getListQuestion().add(new Docs(cursorDefence.getString(2)
-                        ,cursorDefence.getString(3)
-                        ,cursorDefence.getString(4)
-                        ,cursorDefence.getString(5)
-                        ,cursorDefence.getString(6)
-                        ,cursorDefence.getString(7)
-                        ,true
-                ));
-            }
+            map.put(cursor.getString(0),cursor.getString(1));
         }
         adapter = new ViewPagerNoteAdapter(requireActivity(),viewPager2,kindAndQuestionNotes);
         viewPager2.setAdapter(adapter);
@@ -167,10 +147,7 @@ public class NoteQuesFrag extends Fragment {
                 tvAccept.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        database.queryData("UPDATE DetailQuestionTech SET isNoted = 0");
-                        database.queryData("UPDATE DetailQuestionEconomy SET isNoted = 0");
-                        database.queryData("UPDATE DetailQuestionOfficial SET isNoted = 0");
-                        database.queryData("UPDATE DetailQuestionDefence SET isNoted = 0");
+                        database.queryData("DELETE FROM Note WHERE 1=1");
                         tabLayout.setVisibility(View.GONE);
                         viewPager2.setVisibility(View.GONE);
                         dialog.cancel();

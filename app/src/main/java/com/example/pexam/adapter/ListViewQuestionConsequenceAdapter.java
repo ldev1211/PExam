@@ -119,20 +119,19 @@ public class ListViewQuestionConsequenceAdapter extends BaseAdapter {
                 notifyDataSetChanged();
                 SharedPreferences sharedPreferences = context.getSharedPreferences("stateApplication",Context.MODE_PRIVATE);
                 String nameKind = sharedPreferences.getString("nameKindCurr",null);
-                switch (nameKind){
-                    case "Kỹ thuật":
-                        database.queryData("UPDATE DetailQuestionTech SET isNoted = "+((question.isNote())?"1":"0")+" WHERE question = '"+question.getContentQuestion()+"' AND ans1 = '"+ question.getAns1().getContentAns()+"' AND ans2 = '"+question.getAns2().getContentAns()+"' AND ans3 = '"+question.getAns3().getContentAns()+"' AND ans4 = '"+question.getAns4().getContentAns()+"' AND ansRight = '"+question.getAnsRight()+"'");
-                        break;
-                    case "Kinh tế":
-                        database.queryData("UPDATE DetailQuestionEconomy SET isNoted = "+((question.isNote())?"1":"0")+" WHERE question = '"+question.getContentQuestion()+"' AND ans1 = '"+ question.getAns1().getContentAns()+"' AND ans2 = '"+question.getAns2().getContentAns()+"' AND ans3 = '"+question.getAns3().getContentAns()+"' AND ans4 = '"+question.getAns4().getContentAns()+"' AND ansRight = '"+question.getAnsRight()+"'");
-                        break;
-                    case "Tin cơ sở":
-                        database.queryData("UPDATE DetailQuestionOfficial SET isNoted = "+((question.isNote())?"1":"0")+" WHERE question = '"+question.getContentQuestion()+"' AND ans1 = '"+ question.getAns1().getContentAns()+"' AND ans2 = '"+question.getAns2().getContentAns()+"' AND ans3 = '"+question.getAns3().getContentAns()+"' AND ans4 = '"+question.getAns4().getContentAns()+"' AND ansRight = '"+question.getAnsRight()+"'");
-                        break;
-                    case "Quốc phòng":
-                        database.queryData("UPDATE DetailQuestionDefence SET isNoted = "+((question.isNote())?"1":"0")+" WHERE question = '"+question.getContentQuestion()+"' AND ans1 = '"+ question.getAns1().getContentAns()+"' AND ans2 = '"+question.getAns2().getContentAns()+"' AND ans3 = '"+question.getAns3().getContentAns()+"' AND ans4 = '"+question.getAns4().getContentAns()+"' AND ansRight = '"+question.getAnsRight()+"'");
-                        break;
-                }
+                String codeKind = sharedPreferences.getString("codeKindCurr",null);
+                if(question.isNote()) {
+                    database.queryData("INSERT INTO Note VALUES(" +
+                            "'"+sharedPreferences.getString("codeKindCurr",null)+ "'" +
+                            ",'"+sharedPreferences.getString("nameKindCurr",null) +"'" +
+                            ",'"+question.getContentQuestion()+"'" +
+                            ",'"+question.getAns1().getContentAns()+"'" +
+                            ",'"+question.getAns2().getContentAns()+"'" +
+                            ",'"+question.getAns3().getContentAns()+"'" +
+                            ",'"+question.getAns4().getContentAns()+"'" +
+                            ",'"+question.getAnsRight()+"')"
+                    );
+                } else database.queryData("DELETE FROM Note WHERE codeKind = '"+sharedPreferences.getString("codeKindCurr",null)+"' AND contentQuestion = '"+question.getContentQuestion()+"'");
             }
         });
         return view;

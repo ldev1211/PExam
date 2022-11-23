@@ -1,11 +1,43 @@
 package com.example.pexam.model;
 
 public class Exam {
+    private String codeSubj;
     private String nameSubj;
-    private String part;
+    private String namePart;
+    private String codePart;
     private int maxNumQuest;
     private int time;
     private int numAnsRight;
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "codeSubj='" + codeSubj + '\'' +
+                ", nameSubj='" + nameSubj + '\'' +
+                ", namePart='" + namePart + '\'' +
+                ", codePart='" + codePart + '\'' +
+                ", maxNumQuest=" + maxNumQuest +
+                ", time=" + time +
+                ", numAnsRight=" + numAnsRight +
+                '}';
+    }
+
+    public Exam(String codeSubj, String codePart, String namePart, int maxNumQuest, int time, int numAnsRight) {
+        this.codeSubj = codeSubj;
+        this.namePart = namePart;
+        this.codePart = codePart;
+        this.maxNumQuest = maxNumQuest;
+        this.time = time;
+        this.numAnsRight = numAnsRight;
+    }
+
+    public String getCodeSubj() {
+        return codeSubj;
+    }
+
+    public void setCodeSubj(String codeSubj) {
+        this.codeSubj = codeSubj;
+    }
 
     public String getNameSubj() {
         return nameSubj;
@@ -15,12 +47,20 @@ public class Exam {
         this.nameSubj = nameSubj;
     }
 
-    public String getPart() {
-        return part;
+    public String getNamePart() {
+        return namePart;
     }
 
-    public void setPart(String part) {
-        this.part = part;
+    public void setNamePart(String namePart) {
+        this.namePart = namePart;
+    }
+
+    public String getCodePart() {
+        return codePart;
+    }
+
+    public void setCodePart(String codePart) {
+        this.codePart = codePart;
     }
 
     public int getMaxNumQuest() {
@@ -44,14 +84,6 @@ public class Exam {
     }
 
     public void setNumAnsRight(int numAnsRight) {
-        this.numAnsRight = numAnsRight;
-    }
-
-    public Exam(String nameSubj, String part, int maxNumQuest, int time, int numAnsRight) {
-        this.nameSubj = nameSubj;
-        this.part = part;
-        this.maxNumQuest = maxNumQuest;
-        this.time = time;
         this.numAnsRight = numAnsRight;
     }
 }

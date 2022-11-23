@@ -52,7 +52,7 @@ public class ListViewNameExamAdapter extends BaseAdapter {
         tvMaxNumQues = view.findViewById(R.id.tvMaxNumQues);
         progressBar.setProgress((int)((float)exams.get(i).getNumAnsRight()/exams.get(i).getMaxNumQuest()*100));
         tvPer.setText(exams.get(i).getNumAnsRight()+"/"+exams.get(i).getMaxNumQuest());
-        tvPartName.setText(exams.get(i).getPart());
+        tvPartName.setText(exams.get(i).getNamePart());
         TimeCountDown timeCountDown = getTimeCountDown(exams.get(i).getTime());
         tvMaxNumQues.setText(exams.get(i).getMaxNumQuest()+" câu");
         tvTime.setText(timeCountDown.getMinute()+":"+((timeCountDown.getSecond()>=10)?timeCountDown.getSecond():"0"+timeCountDown.getSecond()));

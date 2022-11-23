@@ -5,6 +5,19 @@ public class Docs {
     private String ans1,ans2,ans3,ans4,ansRight;
     private boolean isNote;
 
+    @Override
+    public String toString() {
+        return "Docs{" +
+                "contentQuestion='" + contentQuestion + '\'' +
+                ", ans1='" + ans1 + '\'' +
+                ", ans2='" + ans2 + '\'' +
+                ", ans3='" + ans3 + '\'' +
+                ", ans4='" + ans4 + '\'' +
+                ", ansRight='" + ansRight + '\'' +
+                ", isNote=" + isNote +
+                '}';
+    }
+
     public String getContentQuestion() {
         return contentQuestion;
     }

@@ -7,6 +7,14 @@ public class KindAndQuestionNote {
     private String nameKind;
     private List<Docs> listQuestion;
 
+    @Override
+    public String toString() {
+        return "KindAndQuestionNote{" +
+                "nameKind='" + nameKind + '\'' +
+                ", listQuestion=" + listQuestion +
+                '}';
+    }
+
     public String getNameKind() {
         return nameKind;
     }

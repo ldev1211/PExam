@@ -98,20 +98,7 @@ public class ListViewNoteQuesAdapter extends BaseAdapter {
             public void onClick(View view) {
                 kindAndQuestionNote.getListQuestion().remove(i);
                 notifyDataSetChanged();
-                switch (kindAndQuestionNote.getNameKind()){
-                    case "Kỹ thuật":
-                        database.queryData("UPDATE DetailQuestionTech SET isNoted = 0 WHERE question = '"+noteQuestion.getContentQuestion()+"' AND ans1 = '"+ noteQuestion.getAns1()+"' AND ans2 = '"+noteQuestion.getAns2()+"' AND ans3 = '"+noteQuestion.getAns3()+"' AND ans4 = '"+noteQuestion.getAns4()+"' AND ansRight = '"+noteQuestion.getAnsRight()+"'");
-                        break;
-                    case "Kinh tế":
-                        database.queryData("UPDATE DetailQuestionEconomy SET isNoted = 0 WHERE question = '"+noteQuestion.getContentQuestion()+"' AND ans1 = '"+ noteQuestion.getAns1()+"' AND ans2 = '"+noteQuestion.getAns2()+"' AND ans3 = '"+noteQuestion.getAns3()+"' AND ans4 = '"+noteQuestion.getAns4()+"' AND ansRight = '"+noteQuestion.getAnsRight()+"'");
-                        break;
-                    case "Tin cơ sở":
-                        database.queryData("UPDATE DetailQuestionOfficial SET isNoted = 0 WHERE question = '"+noteQuestion.getContentQuestion()+"' AND ans1 = '"+ noteQuestion.getAns1()+"' AND ans2 = '"+noteQuestion.getAns2()+"' AND ans3 = '"+noteQuestion.getAns3()+"' AND ans4 = '"+noteQuestion.getAns4()+"' AND ansRight = '"+noteQuestion.getAnsRight()+"'");
-                        break;
-                    case "Quốc phòng":
-                        database.queryData("UPDATE DetailQuestionDefence SET isNoted = 0 WHERE question = '"+noteQuestion.getContentQuestion()+"' AND ans1 = '"+ noteQuestion.getAns1()+"' AND ans2 = '"+noteQuestion.getAns2()+"' AND ans3 = '"+noteQuestion.getAns3()+"' AND ans4 = '"+noteQuestion.getAns4()+"' AND ansRight = '"+noteQuestion.getAnsRight()+"'");
-                        break;
-                }
+                database.queryData("DELETE FROM Note WHERE contentQuestion = '"+noteQuestion.getContentQuestion()+"'");
             }
         });
         return view;

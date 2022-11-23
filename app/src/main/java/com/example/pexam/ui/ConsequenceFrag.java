@@ -128,36 +128,13 @@ public class ConsequenceFrag extends Fragment {
         params.height = totalHeight + (lvQuestConsequence.getDividerHeight()*(listAdapter.getCount()-1));
         lvQuestConsequence.setLayoutParams(params);
         lvQuestConsequence.requestLayout();
-        switch (nameKind){
-            case "Kỹ thuật":
-                cursor = database.getData("SELECT numAnsRight FROM ConsequenceExamTech WHERE nameSubj = '"+nameSubj+"' AND part = '"+namePart+"'");
-                break;
-            case "Kinh tế":
-                cursor = database.getData("SELECT numAnsRight FROM ConsequenceExamEconomy WHERE nameSubj = '"+nameSubj+"' AND part = '"+namePart+"'");
-                break;
-            case "Tin cơ sở":
-                cursor = database.getData("SELECT numAnsRight FROM ConsequenceExamOfficial WHERE nameSubj = '"+nameSubj+"' AND part = '"+namePart+"'");
-                break;
-            case "Quốc phòng":
-                cursor = database.getData("SELECT numAnsRight FROM ConsequenceExamDefence WHERE nameSubj = '"+nameSubj+"' AND part = '"+namePart+"'");
-                break;
-        }
-        while(cursor.moveToNext())
-        if (numAnsRight > cursor.getInt(0)){
-            switch (nameKind){
-                case "Kỹ thuật":
-                    database.queryData("UPDATE  ConsequenceExamTech SET numAnsRight = "+numAnsRight+" WHERE nameSubj = '"+nameSubj+"' AND part = '"+namePart+"'");
-                    break;
-                case "Kinh tế":
-                    database.queryData("UPDATE  ConsequenceExamEconomy SET numAnsRight = "+numAnsRight+" WHERE nameSubj = '"+nameSubj+"' AND part = '"+namePart+"'");
-                    break;
-                case "Tin cơ sở":
-                    database.queryData("UPDATE  ConsequenceExamOfficial SET numAnsRight = "+numAnsRight+" WHERE nameSubj = '"+nameSubj+"' AND part = '"+namePart+"'");
-                    break;
-                case "Quốc phòng":
-                    database.queryData("UPDATE  ConsequenceExamDefence SET numAnsRight = "+numAnsRight+" WHERE nameSubj = '"+nameSubj+"' AND part = '"+namePart+"'");
-                    break;
+        Cursor cursor = database.getData("SELECT numAnsRight FROM ConsequenceExam WHERE codePart = '"+sharedPreferences.getString("codePartCurr",null)+"'");
+        if (cursor.moveToNext()){
+            if(cursor.getInt(0)<numAnsRight){
+                database.queryData("INSERT OR REPLACE INTO ConsequenceExam VALUES ('"+sharedPreferences.getString("codePartCurr",null)+"',"+numAnsRight+")");
             }
+        } else {
+            database.queryData("INSERT OR REPLACE INTO ConsequenceExam VALUES ('"+sharedPreferences.getString("codePartCurr",null)+"',"+numAnsRight+")");
         }
         return view;
     }

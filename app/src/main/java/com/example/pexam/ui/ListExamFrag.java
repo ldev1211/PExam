@@ -32,6 +32,7 @@ public class ListExamFrag extends Fragment {
     View viewTabExam,viewTabDocs;
     TextView tvTabExam,tvTabDocs;
     View view;
+    SharedPreferences sharedPreferences;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +46,7 @@ public class ListExamFrag extends Fragment {
         viewPager2 = view.findViewById(R.id.pager_list_exam);
         tabLayout = view.findViewById(R.id.tab_exam_or_docs);
         tvNameExam = view.findViewById(R.id.tv_exam_name);
-        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("stateApplication", Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences("stateApplication", Context.MODE_PRIVATE);
         String nameKindFrListSubj = sharedPreferences.getString("nameSubjCurr",null);
         tvNameExam.setText(nameKindFrListSubj);
         adapter = new ViewPagerListExAdapter(requireActivity(),viewPager2);

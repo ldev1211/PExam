@@ -4,7 +4,6 @@ public class QuestionSearch {
     private String contentQuestion;
     private String ans1,ans2,ans3,ans4;
     private String ansRight;
-    private boolean isNote;
     private int frequency;
 
     public int getFrequency() {
@@ -15,14 +14,13 @@ public class QuestionSearch {
         this.frequency = frequency;
     }
 
-    public QuestionSearch(String contentQuestion, String ans1, String ans2, String ans3, String ans4, String ansRight, boolean isNote, int frequency) {
+    public QuestionSearch(String contentQuestion, String ans1, String ans2, String ans3, String ans4, String ansRight, int frequency) {
         this.contentQuestion = contentQuestion;
         this.ans1 = ans1;
         this.ans2 = ans2;
         this.ans3 = ans3;
         this.ans4 = ans4;
         this.ansRight = ansRight;
-        this.isNote = isNote;
         this.frequency = frequency;
     }
 
@@ -72,13 +70,5 @@ public class QuestionSearch {
 
     public void setAnsRight(String ansRight) {
         this.ansRight = ansRight;
-    }
-
-    public boolean isNote() {
-        return isNote;
-    }
-
-    public void setNote(boolean note) {
-        isNote = note;
     }
 }

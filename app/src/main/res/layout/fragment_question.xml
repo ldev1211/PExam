@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.QuestionFrag">
+    tools:context="ldev.ptithcm.pexam.ui.QuestionFrag">
 
     <TextView
         android:id="@+id/tv_content_quest"
@@ -22,15 +22,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/img_question"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tv_content_quest"
+        app:layout_constraintStart_toStartOf="@+id/tv_content_quest"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_quest" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_content_quest"
+        app:layout_constraintTop_toBottomOf="@+id/img_question"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -94,7 +101,6 @@
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="17dp"
                 android:minHeight="30dp"
-                android:text="Câu trả lời Awekjjrhweierhwelkrjv;oijaewrvowierjwoaier;jilew;eakrjvwklerjwlkajrwelkrjlwk;vjtlerw;tjerwlitai;oertjer;oitjewrotjjpowrtjp3otj3op"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/visivility_a"
@@ -105,11 +111,10 @@
                 android:id="@+id/ansb"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:minHeight="30dp"
                 android:layout_marginStart="18dp"
-                android:layout_marginTop="31dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="17dp"
-                android:text="Câu trả lời BCâu trả lời Awekjjrhweierhwelkrjv;oijaewrvowierjwoaier;jilew;eakrjvwklerjwlkajrwelkrjlwk;vjtlerw;tjerwlitai;oertjer;oitjewrotjjpowrtjp3otj3op"
+                android:minHeight="30dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/visivility_b"
@@ -120,11 +125,10 @@
                 android:id="@+id/ansc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:minHeight="30dp"
                 android:layout_marginStart="18dp"
-                android:layout_marginTop="31dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="17dp"
-                android:text="Câu trả lời CCâu trả lời Awekjjrhweierhwelkrjv;oijaewrvowierjwoaier;jilew;eakrjvwklerjwlkajrwelkrjlwk;vjtlerw;tjerwlitai;oertjer;oitjewrotjjpowrtjp3otj3op"
+                android:minHeight="30dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/visivility_c"
@@ -135,11 +139,10 @@
                 android:id="@+id/ansd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:minHeight="30dp"
                 android:layout_marginStart="18dp"
-                android:layout_marginTop="31dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="17dp"
-                android:text="Câu trả lời DCâu trả lời Awekjjrhweierhwelkrjv;oijaewrvowierjwoaier;jilew;eakrjvwklerjwlkajrwelkrjlwk;vjtlerw;tjerwlitai;oertjer;oitjewrotjjpowrtjp3otj3opCâu trả lời Awekjjrhweierhwelkrjv;oijaewrvowierjwoaier;jilew;eakrjvwklerjwlkajrwelkrjlwk;vjtlerw;tjerwlitai;oertjer;oitjewrotjjpowrtjp3otj3op"
+                android:minHeight="30dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/visivility_d"
@@ -179,6 +182,39 @@
                 app:layout_constraintEnd_toEndOf="@+id/visivility_c"
                 app:layout_constraintTop_toTopOf="@+id/ansd" />
 
+            <ImageView
+                android:id="@+id/img_ansa"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_ansa"
+                app:layout_constraintStart_toStartOf="@+id/ansa"
+                app:layout_constraintTop_toTopOf="@+id/tv_ansa" />
+
+            <ImageView
+                android:id="@+id/img_ansb"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_ansb"
+                app:layout_constraintStart_toStartOf="@+id/ansb"
+                app:layout_constraintTop_toTopOf="@+id/tv_ansb" />
+
+            <ImageView
+                android:id="@+id/img_ansc"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_ansc"
+                app:layout_constraintStart_toStartOf="@+id/ansc"
+                app:layout_constraintTop_toTopOf="@+id/tv_ansc" />
+
+            <ImageView
+                android:id="@+id/img_ansd"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_ansd"
+                app:layout_constraintStart_toStartOf="@+id/ansd"
+                app:layout_constraintTop_toTopOf="@+id/tv_ansd" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

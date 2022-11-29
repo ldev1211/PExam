@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/noteQuesFrag"
-        android:name="com.example.pexam.ui.NoteQuesFrag"
+        android:name="ldev.ptithcm.pexam.ui.NoteQuesFrag"
         android:label="fragment_note_ques"
         tools:layout="@layout/fragment_note_ques" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFrag"
-        android:name="com.example.pexam.ui.HomeFrag"
+        android:name="ldev.ptithcm.pexam.ui.HomeFrag"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/listExamFrag"
-        android:name="com.example.pexam.ui.ListExamFrag"
+        android:name="ldev.ptithcm.pexam.ui.ListExamFrag"
         android:label="fragment_list_exam"
         tools:layout="@layout/fragment_list_exam" >
         <argument
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/listSubjFrag"
-        android:name="com.example.pexam.ui.ListSubjFrag"
+        android:name="ldev.ptithcm.pexam.ui.ListSubjFrag"
         android:label="fragment_list_subj"
         tools:layout="@layout/fragment_list_subj" >
         <action
@@ -68,7 +68,7 @@
     </fragment>
     <fragment
         android:id="@+id/testingExamFrag"
-        android:name="com.example.pexam.ui.TestingExamFrag"
+        android:name="ldev.ptithcm.pexam.ui.TestingExamFrag"
         android:label="fragment_testing_exam"
         tools:layout="@layout/fragment_testing_exam" >
         <action
@@ -82,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/consequenceFrag"
-        android:name="com.example.pexam.ui.ConsequenceFrag"
+        android:name="ldev.ptithcm.pexam.ui.ConsequenceFrag"
         android:label="fragment_consequence"
         tools:layout="@layout/fragment_consequence" >
         <action

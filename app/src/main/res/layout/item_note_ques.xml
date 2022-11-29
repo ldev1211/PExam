@@ -75,21 +75,21 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="28dp"
         android:layout_marginEnd="22dp"
         android:text="Câu trả lời A"
         android:textColor="@color/black"
         android:textSize="14sp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/mark_tv_ansa"
-        app:layout_constraintTop_toBottomOf="@+id/mark_tv_content_quest" />
+        app:layout_constraintTop_toBottomOf="@+id/img_question_note_quest" />
 
     <TextView
         android:id="@+id/mark_ansb"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="50dp"
         android:text="Câu trả lời B"
         android:textColor="@color/black"
         android:textSize="14sp"
@@ -102,7 +102,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="50dp"
         android:text="Câu trả lời C"
         android:textColor="@color/black"
         android:textSize="14sp"
@@ -115,7 +115,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="50dp"
         android:text="Câu trả lời D"
         android:textColor="@color/black"
         android:textSize="14sp"
@@ -134,5 +134,50 @@
         app:layout_constraintEnd_toEndOf="@+id/mark_ansa"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_mark" />
+
+    <ImageView
+        android:id="@+id/img_ansa_note_quest"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/mark_tv_ansa"
+        app:layout_constraintStart_toStartOf="@+id/mark_ansa"
+        app:layout_constraintTop_toTopOf="@+id/mark_tv_ansa" />
+
+    <ImageView
+        android:id="@+id/img_ansb_note_quest"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/mark_tv_ansb"
+        app:layout_constraintStart_toStartOf="@+id/mark_ansb"
+        app:layout_constraintTop_toTopOf="@+id/mark_tv_ansb" />
+
+    <ImageView
+        android:id="@+id/img_ansc_note_quest"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/mark_tv_ansc"
+        app:layout_constraintStart_toStartOf="@+id/mark_ansc"
+        app:layout_constraintTop_toTopOf="@+id/mark_tv_ansc" />
+
+    <ImageView
+        android:id="@+id/img_ansd_note_quest"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/mark_tv_ansd"
+        app:layout_constraintStart_toStartOf="@+id/mark_ansd"
+        app:layout_constraintTop_toTopOf="@+id/mark_tv_ansd" />
+
+    <ImageView
+        android:id="@+id/img_question_note_quest"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/mark_tv_content_quest"
+        app:layout_constraintStart_toStartOf="@+id/mark_tv_content_quest"
+        app:layout_constraintTop_toBottomOf="@+id/mark_tv_content_quest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,6 +43,7 @@
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/drawable/splash_screen.xml" value="0.1" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/drawable/visibility.xml" value="0.2035" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/font/open_sans.xml" value="0.23076923076923078" />
+        <entry key="..\:/AndroidProject/PExam/app/src/main/res/font/open_sans_semibold.xml" value="0.234375" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/activity_main.xml" value="0.23464373464373464" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/ans_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/custom_item_tab_ex_doc.xml" value="0.20416666666666666" />
@@ -51,7 +52,7 @@
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/diaglog_submit.xml" value="0.33" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/dialog_y_n.xml" value="0.33" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_consequence.xml" value="0.25" />
-        <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_list_exam.xml" value="0.2" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_list_subj.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_note_ques.xml" value="0.33" />
@@ -63,7 +64,7 @@
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/fragment_testing_exam.xml" value="0.2" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_docs.xml" value="0.5" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_grid.xml" value="0.22" />
-        <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_note_ques.xml" value="0.33" />
+        <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_note_ques.xml" value="0.25" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_part.xml" value="0.493844049247606" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_search.xml" value="0.33" />
         <entry key="..\:/AndroidProject/PExam/app/src/main/res/layout/item_subj.xml" value="0.22" />
